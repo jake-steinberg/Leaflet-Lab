@@ -5,8 +5,8 @@ var map;
 function createMap(){
     //create the map
     map = L.map('map', {
-        center: [20, 40],
-        zoom: 4
+        center: [20, 0],
+        zoom: 2
     });
 
     var CartoDB_DarkMatterNoLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
@@ -34,15 +34,15 @@ function onEachFeature(feature, layer) {
 //function to retrieve the data and place it on the map
 function getData(){
     //load the data
-    fetch("data/cheetahsO.geojson")
+    fetch("data/MegaCities.geojson")
         .then(function(response){
             return response.json();
         })
         .then(function(json){            
             //create marker options
-            var originMarkerOptions = {
+            var geojsonMarkerOptions = {
                 radius: 8,
-                fillColor: "#ffb703",
+                fillColor: "#ff7800",
                 color: "#000",
                 weight: 1,
                 opacity: 1,
@@ -51,29 +51,7 @@ function getData(){
             //create a Leaflet GeoJSON layer and add it to the map
             L.geoJson(json, {
                 pointToLayer: function (feature, latlng){
-                    return L.circleMarker(latlng, originMarkerOptions);
-                },
-            onEachFeature:onEachFeature    
-            }).addTo(map);
-        });
-        fetch("data/cheetahsTD.geojson")
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(json){            
-            //create marker options
-            var transitDestMarkerOptions = {
-                radius: 8,
-                fillColor: "#219ebc",
-                color: "#000",
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            };
-            //create a Leaflet GeoJSON layer and add it to the map
-            L.geoJson(json, {
-                pointToLayer: function (feature, latlng){
-                    return L.circleMarker(latlng, transitDestMarkerOptions);
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
                 },
             onEachFeature:onEachFeature    
             }).addTo(map);

@@ -1,1 +1,5 @@
 /*Add CSS styles here*/
+#map{
+    width: 700px;
+    height: 800px;
+}
